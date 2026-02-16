@@ -1,0 +1,19 @@
+.language-switcher {
+  display: flex;
+  gap: 0.5rem;
+  
+  button {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    
+    &.active {
+      background: #1976d2;
+      color: white;
+      border-color: #1976d2;
+      font-weight: bold;
+    }
+  }
+}

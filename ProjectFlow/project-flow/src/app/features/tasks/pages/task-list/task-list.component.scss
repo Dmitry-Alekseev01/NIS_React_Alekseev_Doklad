@@ -1,0 +1,145 @@
+.task-list {
+  padding: 2rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
+
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      background-color: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #2563eb;
+      }
+    }
+  }
+
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #64748b;
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: #f1f5f9;
+    border-radius: 0.75rem;
+    color: #475569;
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .task-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border-color: #cbd5e1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #0f172a;
+        margin: 0;
+        flex: 1;
+      }
+
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        margin-left: 0.5rem;
+
+        &.status-todo {
+          background-color: #f1f5f9;
+          color: #475569;
+        }
+        &.status-in-progress {
+          background-color: #dbeafe;
+          color: #1e40af;
+        }
+        &.status-done {
+          background-color: #dcfce7;
+          color: #166534;
+        }
+      }
+    }
+
+    .description {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .task-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 0.75rem;
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,45 @@
+<div class="task-list">
+  <header class="list-header">
+    <h1>{{ 'tasks' | translate }}</h1>
+    <a routerLink="/tasks/new" class="btn-primary">{{ 'newTask' | translate }}</a>
+  </header>
+
+  <div *ngIf="loading$ | async" class="loading-spinner">
+    <div class="spinner"></div>
+    <span>{{ 'loading' | translate }}</span>
+  </div>
+
+  <ng-container *ngIf="!(loading$ | async)">
+    <div *ngIf="(tasks$ | async) as tasks; else mockBlock" class="task-grid">
+      <div *ngFor="let task of tasks" class="task-card" [routerLink]="['/tasks', task.id]">
+        <div class="card-header">
+          <h3>{{ task.name }}</h3>
+          <span class="status-badge" [ngClass]="getStatusClass(task.status)">
+            {{ ('taskStatus.' + task.status) | translate }}
+          </span>
+        </div>
+        <p class="description">{{ task.description }}</p>
+        <div class="task-footer">
+          <span class="project-id" *ngIf="task.projectId">{{ 'projectNumber' | translate }} {{ task.projectId }}</span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #mockBlock>
+      <div class="task-grid">
+        <div *ngFor="let task of mockTasks" class="task-card" [routerLink]="['/tasks', task.id]">
+          <div class="card-header">
+            <h3>{{ task.name }}</h3>
+            <span class="status-badge" [ngClass]="getStatusClass(task.status)">
+              {{ ('taskStatus.' + task.status) | translate }}
+            </span>
+          </div>
+          <p class="description">{{ task.description }}</p>
+          <div class="task-footer">
+            <span class="project-id">{{ 'projectNumber' | translate }} {{ task.projectId }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

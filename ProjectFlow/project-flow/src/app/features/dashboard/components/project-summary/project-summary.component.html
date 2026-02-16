@@ -1,0 +1,33 @@
+<div *ngIf="loading" class="loading-spinner">
+  <div class="spinner"></div>
+  <span>{{ 'loading' | translate }}</span>
+</div>
+
+<div *ngIf="!loading && (!projects || projects.length === 0)" class="empty-state">
+  <p>{{ 'noProjectsYet' | translate }}</p>
+  <a routerLink="/projects/new" class="btn-primary">{{ 'newProject' | translate }}</a>
+</div>
+
+<div class="project-cards" *ngIf="!loading && projects && projects.length > 0">
+  <div *ngFor="let project of projects" class="project-card" [routerLink]="['/projects', project.id]">
+    <div class="card-header">
+      <h3>{{ project.name }}</h3>
+      <span class="status-badge" [ngClass]="getStatusClass(project.status)">
+        {{ ('status.' + project.status) | translate }}
+      </span>
+    </div>
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>{{ 'progress' | translate }}</span>
+        <span>{{ project.progress }}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="project.progress"></div>
+      </div>
+    </div>
+    <div class="team" *ngIf="project.team.length">
+      <span class="team-label">{{ 'team' | translate }}:</span>
+      <span class="team-members">{{ project.team.join(', ') }}</span>
+    </div>
+  </div>
+</div>

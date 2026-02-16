@@ -1,0 +1,14 @@
+<div class="dashboard-page">
+  <header class="dashboard-header">
+    <h1>{{ 'dashboard' | translate }}</h1>
+  </header>
+
+  <div class="dashboard-grid">
+    <div class="grid-item summary">
+      <app-project-summary [projects]="projects$ | async" [loading]="loading$ | async"></app-project-summary>
+    </div>
+    <div class="grid-item chart">
+      <app-activity-chart [projects]="projects$ | async"></app-activity-chart>
+    </div>
+  </div>
+</div>

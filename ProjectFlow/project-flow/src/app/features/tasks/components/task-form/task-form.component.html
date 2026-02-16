@@ -1,0 +1,72 @@
+<div class="task-form-container">
+  <div class="form-card">
+    <h2>{{ (isEdit ? 'Edit Task' : 'New Task') | translate }}</h2>
+
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+      <div class="form-group">
+        <label for="name">{{ 'Task Name' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="task.name"
+          required
+          #name="ngModel"
+          placeholder="Enter task name"
+        />
+        <div *ngIf="name.invalid && name.touched" class="error">
+          {{ 'Task name is required' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">{{ 'Description' | translate }}</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          [(ngModel)]="task.description"
+          required
+          #description="ngModel"
+          placeholder="Enter task description"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error">
+          {{ 'Description is required' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">{{ 'Status' | translate }}</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="task.status"
+          required
+        >
+          <option value="todo">{{ 'To Do' | translate }}</option>
+          <option value="inProgress">{{ 'In Progress' | translate }}</option>
+          <option value="done">{{ 'Done' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">{{ 'Due Date' | translate }}</label>
+        <input
+          type="date"
+          id="dueDate"
+          name="dueDate"
+          [(ngModel)]="task.dueDate"
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="taskForm.invalid" class="btn-primary">
+          {{ (isEdit ? 'Update' : 'Create') | translate }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn-secondary">
+          {{ 'Cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

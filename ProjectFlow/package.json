@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@angular/cdk": "^21.1.4",
+    "@angular/localize": "^21.1.4",
+    "@angular/material": "^21.1.4",
+    "@ngrx/effects": "^21.0.1",
+    "@ngrx/entity": "^21.0.1",
+    "@ngrx/store": "^21.0.1",
+    "@ngrx/store-devtools": "^21.0.1",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "@types/d3": "^7.4.3",
+    "@types/lodash-es": "^4.17.12",
+    "d3": "^7.9.0",
+    "date-fns": "^4.1.0",
+    "echarts": "^6.0.0",
+    "lodash-es": "^4.17.23",
+    "ngx-echarts": "^21.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.1.1",
+    "socket.io-client": "^4.8.3"
+  }
+}

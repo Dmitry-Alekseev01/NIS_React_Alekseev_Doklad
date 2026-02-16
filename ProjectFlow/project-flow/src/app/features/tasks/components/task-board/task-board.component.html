@@ -1,0 +1,99 @@
+<!-- <div class="task-board">
+  <div class="column">
+    <h3>To Do</h3>
+    <div class="tasks">
+      <div *ngFor="let task of todoTasks" class="task-card" draggable="true">
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <h3>In Progress</h3>
+    <div class="tasks">
+      <div *ngFor="let task of inProgressTasks" class="task-card">
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <h3>Done</h3>
+    <div class="tasks">
+      <div *ngFor="let task of doneTasks" class="task-card">
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="task-form-container">
+  <div class="form-card">
+    <h2>{{ (isEdit ? 'editTask' : 'newTask') | translate }}</h2>
+
+    <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+      <div class="form-group">
+        <label for="name">{{ 'taskName' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="task.name"
+          required
+          #name="ngModel"
+          [placeholder]="'taskNamePlaceholder' | translate"
+        />
+        <div *ngIf="name.invalid && name.touched" class="error">
+          {{ 'taskNameRequired' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">{{ 'description' | translate }}</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          [(ngModel)]="task.description"
+          required
+          #description="ngModel"
+          [placeholder]="'descriptionPlaceholder' | translate"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error">
+          {{ 'descriptionRequired' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">{{ 'status' | translate }}</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="task.status"
+          required
+        >
+          <option value="todo">{{ 'taskStatus.todo' | translate }}</option>
+          <option value="inProgress">{{ 'taskStatus.inProgress' | translate }}</option>
+          <option value="done">{{ 'taskStatus.done' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">{{ 'dueDate' | translate }}</label>
+        <input
+          type="date"
+          id="dueDate"
+          name="dueDate"
+          [(ngModel)]="task.dueDate"
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="taskForm.invalid" class="btn-primary">
+          {{ (isEdit ? 'update' : 'create') | translate }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn-secondary">
+          {{ 'cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="project-detail" *ngIf="project$ | async as project; else loading">
+  <div class="detail-card">
+    <div class="card-header">
+      <h1>{{ project.name }}</h1>
+      <span class="status-badge" [ngClass]="getStatusClass(project.status)">
+        {{ ('status.' + project.status) | translate }}
+      </span>
+    </div>
+
+    <p class="description">{{ project.description }}</p>
+
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>{{ 'progress' | translate }}</span>
+        <span>{{ project.progress }}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="project.progress"></div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">{{ 'startDate' | translate }}</span>
+        <span class="info-value">{{ project.startDate | dateFormat:'MMMM do, yyyy' }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">{{ 'endDate' | translate }}</span>
+        <span class="info-value">{{ project.endDate | dateFormat:'MMMM do, yyyy' }}</span>
+      </div>
+      <div class="info-item full-width">
+        <span class="info-label">{{ 'team' | translate }}</span>
+        <span class="info-value team-members">
+          <span *ngFor="let member of project.team; let last = last">
+            {{ member }}<span *ngIf="!last">, </span>
+          </span>
+          <span *ngIf="!project.team?.length">—</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a routerLink="/projects" class="btn-secondary">{{ 'backToList' | translate }}</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+    <span>{{ 'loading' | translate }}</span>
+  </div>
+</ng-template>

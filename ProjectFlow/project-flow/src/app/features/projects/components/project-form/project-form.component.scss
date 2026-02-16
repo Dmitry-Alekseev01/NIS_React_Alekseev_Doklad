@@ -1,0 +1,105 @@
+.project-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 2rem;
+
+  .form-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #334155;
+        margin-bottom: 0.5rem;
+      }
+
+      input, textarea, select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .error {
+        color: #dc2626;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.btn-primary {
+          background-color: #3b82f6;
+          color: white;
+
+          &:hover:not(:disabled) {
+            background-color: #2563eb;
+          }
+
+          &:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+          }
+        }
+
+        &.btn-secondary {
+          background-color: white;
+          color: #334155;
+          border: 1px solid #cbd5e1;
+
+          &:hover {
+            background-color: #f1f5f9;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="analytics-page">
+  <header class="page-header">
+    <h1>{{ 'analytics' | translate }}</h1>
+    <div class="project-selector" *ngIf="(projects$ | async)?.length">
+      <label for="projectSelect">{{ 'selectProject' | translate }}</label>
+      <select id="projectSelect" (change)="onProjectChange($event)">
+        <option value="" disabled selected>{{ 'chooseProject' | translate }}</option>
+        <option *ngFor="let project of projects$ | async" [value]="project.id">
+          {{ project.name }}
+        </option>
+      </select>
+    </div>
+  </header>
+
+  <div *ngIf="(projectsLoading$ | async) || (analyticsLoading$ | async)" class="loading-spinner">
+    <div class="spinner"></div>
+    <span>{{ 'loading' | translate }}</span>
+  </div>
+
+  <ng-container *ngIf="!(projectsLoading$ | async)">
+    <div *ngIf="selectedProjectId && (analyticsData$ | async) as data; else noProject">
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>{{ 'burndownChart' | translate }}</h3>
+          <app-burn-down-chart [data]="data"></app-burn-down-chart>
+        </div>
+        <div class="chart-card">
+          <h3>{{ 'dependencyGraph' | translate }}</h3>
+          <app-dependency-graph
+            [nodes]="data.dependencies?.nodes || []"
+            [links]="data.dependencies?.links || []"
+          ></app-dependency-graph>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noProject>
+      <div class="empty-state">
+        <p>{{ 'selectProjectToViewAnalytics' | translate }}</p>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

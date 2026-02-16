@@ -1,0 +1,30 @@
+<div class="task-detail" *ngIf="currentTask as task; else loading">
+  <div class="detail-card">
+    <div class="card-header">
+      <h1>{{ task.name }}</h1>
+      <span class="status-badge" [ngClass]="getStatusClass(task.status)">
+        {{ ('taskStatus.' + task.status) | translate }}
+      </span>
+    </div>
+
+    <p class="description">{{ task.description }}</p>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">{{ 'project' | translate }}</span>
+        <span class="info-value">{{ 'projectNumber' | translate }} {{ task.projectId }}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a routerLink="/tasks" class="btn-secondary">{{ 'backToList' | translate }}</a>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+    <span>{{ 'loading' | translate }}</span>
+  </div>
+</ng-template>

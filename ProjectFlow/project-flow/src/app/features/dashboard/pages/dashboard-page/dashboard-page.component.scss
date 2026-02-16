@@ -1,0 +1,13 @@
+.dashboard-page {
+  padding: 1rem;
+
+  &__header {
+    margin-bottom: 2rem;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+}
