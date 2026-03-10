@@ -48,6 +48,12 @@
   "passwordRequired": "Password is required",
   "submit": "Submit",
   "taskNamePlaceholder": "Enter task name",
-  "descriptionPlaceholder": "Enter task description",
-  "projectActivity": "Project Activity"
+  "projectActivity": "Project Activity",
+  "activity": "Activity",
+  "projectNamePlaceholder": "Enter project name",
+  "descriptionPlaceholder": "Enter project description",
+  "remainingTasks": "Remaining Tasks",
+  "ideal": "Ideal",
+  "actual": "Actual",
+  "noData": "No data available"
 }

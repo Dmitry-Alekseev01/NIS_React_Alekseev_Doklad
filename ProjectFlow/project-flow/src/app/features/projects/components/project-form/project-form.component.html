@@ -1,4 +1,4 @@
-<div class="project-form-container">
+<!-- <div class="project-form-container">
   <div class="form-card">
     <h2>{{ (isEdit ? 'Edit Project' : 'New Project') | translate }}</h2>
 
@@ -68,6 +68,83 @@
         </button>
         <button type="button" (click)="cancel()" class="btn-secondary">
           {{ 'Cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+
+<div class="project-form-container">
+  <div class="form-card">
+    <h2>{{ (isEdit ? 'editProject' : 'newProject') | translate }}</h2>
+
+    <form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+      <div class="form-group">
+        <label for="name">{{ 'projectName' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="project.name"
+          required
+          #name="ngModel"
+          [placeholder]="'projectNamePlaceholder' | translate"
+        />
+        <div *ngIf="name.invalid && name.touched" class="error">
+          {{ 'projectNameRequired' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">{{ 'description' | translate }}</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          [(ngModel)]="project.description"
+          required
+          #description="ngModel"
+          [placeholder]="'descriptionPlaceholder' | translate"
+        ></textarea>
+        <div *ngIf="description.invalid && description.touched" class="error">
+          {{ 'descriptionRequired' | translate }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">{{ 'status' | translate }}</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="project.status"
+          required
+        >
+          <option value="active">{{ 'status.active' | translate }}</option>
+          <option value="completed">{{ 'status.completed' | translate }}</option>
+          <option value="onHold">{{ 'status.onHold' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="progress">{{ 'progressPercent' | translate }}</label>
+        <input
+          type="number"
+          id="progress"
+          name="progress"
+          [(ngModel)]="project.progress"
+          min="0"
+          max="100"
+          required
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="projectForm.invalid" class="btn-primary">
+          {{ (isEdit ? 'update' : 'create') | translate }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn-secondary">
+          {{ 'cancel' | translate }}
         </button>
       </div>
     </form>

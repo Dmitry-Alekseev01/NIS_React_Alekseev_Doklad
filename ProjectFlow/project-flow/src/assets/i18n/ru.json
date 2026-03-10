@@ -49,5 +49,11 @@
   "submit": "Войти",
   "taskNamePlaceholder": "Введите название задачи",
   "descriptionPlaceholder": "Введите описание задачи",
-  "projectActivity": "Активность проектов"
+  "projectActivity": "Активность проектов",
+  "activity": "Активность",
+  "projectNamePlaceholder": "Введите название проекта",
+  "remainingTasks": "Осталось задач",
+  "ideal": "Идеальный",
+  "actual": "Фактический",
+  "noData": "Нет данных"
 }

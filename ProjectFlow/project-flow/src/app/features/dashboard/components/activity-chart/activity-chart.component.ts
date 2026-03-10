@@ -1,6 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
+import { TranslateService } from '@ngx-translate/core';
+import { Subject, takeUntil } from 'rxjs';
 import { Project } from '../../../../store/project/project.model';
 import { format, subDays } from 'date-fns';
 
@@ -16,16 +18,32 @@ import { format, subDays } from 'date-fns';
     }
   `]
 })
-export class ActivityChartComponent implements OnChanges {
+export class ActivityChartComponent implements OnChanges, OnDestroy {
   @Input() projects: Project[] | null = [];
 
   chartOption: EChartsOption = {};
+  private destroy$ = new Subject<void>();
+
+  constructor(private translate: TranslateService) {
+    this.translate.onLangChange
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        if (this.projects) {
+          this.buildChart();
+        }
+      });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('ActivityChartComponent projects received:', this.projects);
     if (this.projects) {
       this.buildChart();
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private buildChart(): void {
@@ -37,9 +55,12 @@ export class ActivityChartComponent implements OnChanges {
       activityData = dates.map(() => Math.floor(Math.random() * 5) + 1);
     }
 
+    const titleText = this.translate.instant('projectActivity');
+    const seriesName = this.translate.instant('activity');
+
     this.chartOption = {
       title: {
-        text: 'Project Activity',
+        text: titleText,
         left: 'center',
         textStyle: { fontSize: 16, fontWeight: 'normal', color: '#334155' }
       },
@@ -68,7 +89,7 @@ export class ActivityChartComponent implements OnChanges {
       },
       series: [
         {
-          name: 'Activity',
+          name: seriesName,
           type: 'bar',
           data: activityData,
           itemStyle: {
